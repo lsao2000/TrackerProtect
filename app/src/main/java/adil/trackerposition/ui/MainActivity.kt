@@ -1,9 +1,12 @@
-package adil.trackerposition
+package adil.trackerposition.ui
 
+import adil.trackerposition.R
+import adil.trackerposition.viewModelConnector.TrackerLocation
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 
 class MainActivity : AppCompatActivity(){
     lateinit var latitude: TextView
@@ -14,9 +17,13 @@ class MainActivity : AppCompatActivity(){
         latitude = findViewById(R.id.latitude)
         longitude = findViewById(R.id.longitude)
         val button: Button = findViewById(R.id.btnGetLocation)
-        var trackerLocation:TrackerLocation = TrackerLocation(this@MainActivity)
+        var trackerLocation: TrackerLocation = TrackerLocation(this@MainActivity)
         button.setOnClickListener {
-
+            try {
+                trackerLocation.getLocation(latitude, longitude)
+            }catch (ex:Exception){
+                Toast.makeText(this@MainActivity, ex.message,Toast.LENGTH_LONG).show()
+            }
         }
     }
 

@@ -1,5 +1,6 @@
-package adil.trackerposition
+package adil.trackerposition.ui
 
+import adil.trackerposition.R
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 

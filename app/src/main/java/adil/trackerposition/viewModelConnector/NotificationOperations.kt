@@ -1,5 +1,7 @@
-package adil.trackerposition
+package adil.trackerposition.viewModelConnector
 
+import adil.trackerposition.R
+import adil.trackerposition.ui.NotifactionActivity
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
