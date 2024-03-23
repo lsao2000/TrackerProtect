@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/home"
+        android:title="@string/prompt_home"
+        android:enabled="true"
+        android:icon="@drawable/home"/>
+    <item
+        android:id="@+id/all_devices"
+        android:enabled="true"
+        android:icon="@drawable/all_devices"
+        android:title="@string/prompt_track"/>
+    <item
+        android:id="@+id/add_device"
+        android:title="@string/prompt_add_device"
+        android:icon="@drawable/add_device"
+        android:enabled="true"/>
+    <item
+        android:id="@+id/profile"
+        android:icon="@drawable/profile"
+        android:title="@string/prompt_profile"
+        android:enabled="true"/>
+</menu>
