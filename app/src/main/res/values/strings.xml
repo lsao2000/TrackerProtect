@@ -30,5 +30,8 @@
         <item>Safi</item>
     </string-array>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment">This is a home fragement</string>
+    <string name="profile_fragment">This is a profile fragement</string>
+    <string name="add_device_fragment">This is a add Device  fragement</string>
+    <string name="tracking_fragment">This is a tracking fragement</string>
 </resources>
