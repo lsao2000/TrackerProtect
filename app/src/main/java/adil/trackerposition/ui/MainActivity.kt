@@ -25,22 +25,23 @@ class MainActivity : AppCompatActivity(){
         supportFragmentManager.beginTransaction().add(R.id.fram, Home(this@MainActivity)).commit()
         frameLayout = findViewById(R.id.fram)
         bottomNavigation = findViewById(R.id.nav)
+        val support = supportFragmentManager
         bottomNavigation.setOnItemSelectedListener {menu ->
             when(menu.itemId){
                 R.id.home -> {
-                    HandleButtonAction.changeFragment("home", R.id.fram, supportFragmentManager, this@MainActivity)
+                    HandleButtonAction.changeFragment("home", R.id.fram, support, this@MainActivity)
                     true
                 }
                 R.id.all_devices ->{
-                    HandleButtonAction.changeFragment("tracking", R.id.fram, supportFragmentManager, this@MainActivity)
+                    HandleButtonAction.changeFragment("tracking", R.id.fram, support, this@MainActivity)
                     true
                 }
                 R.id.profile -> {
-                    HandleButtonAction.changeFragment("profile", R.id.fram, supportFragmentManager, this@MainActivity)
+                    HandleButtonAction.changeFragment("profile", R.id.fram, support, this@MainActivity)
                     true
                 }
                 R.id.add_device -> {
-                    HandleButtonAction.changeFragment("addDevice", R.id.fram, supportFragmentManager, this@MainActivity)
+                    HandleButtonAction.changeFragment("addDevice", R.id.fram, support, this@MainActivity)
                     true
                 }
                 else -> false

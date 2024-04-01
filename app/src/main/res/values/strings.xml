@@ -4,7 +4,7 @@
     <string name="channel_description">channel_01 description</string>
     <string name="login">Sign in</string>
     <string name="register">Register</string>
-    <string name="brand">MyTrack</string>
+    <string name="brand">TrackWise</string>
     <string name="prompt_email">Email</string>
     <string name="hint_email">Ex: jhonWick@gmail.com…</string>
     <string name="prompt_password">Password</string>
@@ -20,6 +20,17 @@
     <string name="prompt_track">Track</string>
     <string name="prompt_add_device">Add Device</string>
     <string name="prompt_profile">Profile</string>
+    <string name="prompt_device_name">Name Device</string>
+    <string name="hint_device_name">Ex: Dacia…</string>
+    <string name="imei">IMEI</string>
+    <string name="hint_imei">Ex: 426235239281392…</string>
+    <string name="prompt_add">Add</string>
+    <string name="add_device_form">Add Device</string>
+    <string name="nameUser">Lahcen</string>
+    <string name="theme">Theme</string>
+    <string name="theme_info">Change Theme of your app</string>
+    <string name="langue">Language</string>
+    <string name="langueInfo">Change your language for which you prefer most</string>
     <string-array name="cities">
         <item>Rabat</item>
         <item>Casablanca</item>
@@ -29,9 +40,8 @@
         <item>Marrakech</item>
         <item>Safi</item>
     </string-array>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">This is a home fragement</string>
     <string name="profile_fragment">This is a profile fragement</string>
-    <string name="add_device_fragment">This is a add Device  fragement</string>
+    <string name="add_device_fragment">This is a add Device fragement</string>
     <string name="tracking_fragment">This is a tracking fragement</string>
 </resources>

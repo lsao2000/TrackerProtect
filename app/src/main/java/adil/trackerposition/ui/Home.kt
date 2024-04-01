@@ -37,12 +37,6 @@ class Home(var ctx:Activity) : Fragment() {
         var event6 = Event("temara", date, "stop")
         var event:List<Event> = listOf(event1, event2, event3, event4, event5, event6)
         var user1= User("sdoisfd", 44.4, 323.2,"klsdf","lahcen", event)
-//        var user2=  User("sdoisfd", 44.4, 323.2,"klsdf","ali" , event )
-//        var user3 = User("sdoisfd", 44.4, 323.2,"klsdf","smail" , event)
-//        var user4=  User("sdoisfd", 44.4, 323.2,"klsdf","mahdi" , event)
-//        var user5=  User("sdoisfd", 44.4, 323.2,"klsdf","hasan" , event)
-//        var listUsers:List<User> = listOf(user1, user2, user3, user4, user5,user1, user2, user3, user4, user5, user1, user2, user3, user4, user5, user1, user2, user3, user4,
-//            user1, user2, user3, user4, user5,user5, user1, user2, user3, user4, user5,user1, user2, user3, user4, user5,user1, user2, user3, user4, user5,user1, user2, user3, user4, user5,user1, user2, user3, user4, user5)
         var listUsers = listOf(user1, user1)
         try {
             val eventAdapter:EventAdapter = EventAdapter(ctx, listUsers)
