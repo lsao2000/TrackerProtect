@@ -19,7 +19,7 @@
                 android:id="@+id/emailText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/prompt_email"
+                android:text="@string/prompt_username"
                 android:layout_marginTop="20dp"
                 android:textAppearance="@style/loginView"
                 android:layout_marginStart="20dp"
@@ -32,12 +32,12 @@
                 android:layout_marginEnd="20dp"
                 android:layout_marginStart="20dp">
             <EditText
-                    android:id="@+id/email"
+                    android:id="@+id/username"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
-                    android:hint="@string/hint_email"
+                    android:hint="@string/hint_username"
                     style="@style/no_underline_editText"
                     android:layout_gravity="center"
                     android:inputType="textEmailAddress"

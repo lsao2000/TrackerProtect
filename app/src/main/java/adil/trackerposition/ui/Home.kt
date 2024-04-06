@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import adil.trackerposition.R
 import adil.trackerposition.data.Api.User
 import adil.trackerposition.data.api.Event
+import adil.trackerposition.viewModelConnector.DatabaseFunctionallity
 import adil.trackerposition.viewModelConnector.EventAdapter
 import android.app.Activity
 import android.os.Build
@@ -16,7 +17,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import java.time.LocalDate
 
-class Home(var ctx:Activity) : Fragment() {
+class Home(var ctx:Activity, var user_id:Int) : Fragment() {
     lateinit var myExpandList:ExpandableListView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +37,8 @@ class Home(var ctx:Activity) : Fragment() {
         var event5 = Event("sale", date, "moving")
         var event6 = Event("temara", date, "stop")
         var event:List<Event> = listOf(event1, event2, event3, event4, event5, event6)
-        var user1= User("sdoisfd", 44.4, 323.2,"klsdf","lahcen", event)
+//        var user = DatabaseFunctionallity(this.context)
+        var user1= User(user_id,"lksdf","lahcenenligne@gmail.com","lahcen","rabat", event, 33.2002, 2.2002)
         var listUsers = listOf(user1, user1)
         try {
             val eventAdapter:EventAdapter = EventAdapter(ctx, listUsers)

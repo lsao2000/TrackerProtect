@@ -15,14 +15,10 @@ import android.view.View
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import android.view.animation.Animation
-import android.view.animation.Animation.AnimationListener
 import android.view.animation.AnimationUtils
-import android.widget.ExpandableListView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.getSystemService
-import androidx.core.content.withStyledAttributes
-import com.bumptech.glide.load.engine.executor.GlideExecutor
 
 @SuppressLint("CustomSplashScreen")
 class SplashScreen : AppCompatActivity() {
@@ -38,7 +34,7 @@ class SplashScreen : AppCompatActivity() {
         brand = findViewById(R.id.brand)
         Glide.with(this).load(R.drawable.error_connection).into(errorView)
         Glide.with(this).load(R.drawable.logo).into(imageView)
-        testNetwork = CheckNetworkConnection(this@SplashScreen, "splash")
+        testNetwork = CheckNetworkConnection(this@SplashScreen)
         if(testNetwork.checkNetwork()){
             addAnimation()
         }else{
@@ -83,6 +79,7 @@ class SplashScreen : AppCompatActivity() {
             override fun onAvailable(network: Network) {
                 Toast.makeText(this@SplashScreen,"connection available", Toast.LENGTH_LONG).show()
                 addAnimation()
+                connectivityManager.unregisterNetworkCallback(this)
             }
 
             override fun onLost(network: Network) {
@@ -117,8 +114,10 @@ class SplashScreen : AppCompatActivity() {
         }
         connectivityManager.registerDefaultNetworkCallback(networkCallback)
     }
+
+
     fun switchActivity(){
-        val intent = Intent(this@SplashScreen, MainActivity::class.java)
+        val intent = Intent(this@SplashScreen, LoginActivity::class.java)
         startActivity(intent)
         finish()
     }

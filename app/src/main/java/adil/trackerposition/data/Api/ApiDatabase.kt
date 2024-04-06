@@ -1,10 +1,7 @@
 package adil.trackerposition.data.Api
 
 import retrofit2.Call
-import retrofit2.http.POST
-import retrofit2.http.GET
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
+import retrofit2.http.*
 
 interface ApiDatabase {
     @GET("users.php")
@@ -16,4 +13,14 @@ interface ApiDatabase {
     @GET("getUser.php")
     fun getUser():Call<List<User>>
 
+    @FormUrlEncoded
+    @POST("login.php")
+    fun loginUser(@Field("username") username:String, @Field("pwd") pwd:String):Call<ResponseObject>
+
+    @FormUrlEncoded
+    @POST("register_user.php")
+    fun registerUser(@Field("username") username:String, @Field("password") password:String, @Field("email") emailUser:String, @Field("city") userCity:String):Call<ResponseObject>
+
+    @GET("getUserById.php")
+    fun getUserById(@Query("id") id:Int):Call<ResponseObject>
 }

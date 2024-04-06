@@ -77,17 +77,17 @@ class TrackerLocation(val context: Context)  {
         var retrofit: Retrofit? = GetDatabaseApi.getRetrofit()
         var apiDatabase: ApiDatabase = retrofit!!.create(ApiDatabase::class.java)
         var user: User = User()
-        user.id = id;
+        User.id = id;
         user.latitude = latitude
         user.longitude = longitude
-        var result = apiDatabase.updateLocation(user.latitude, user.longitude, user.id)
+        var result = apiDatabase.updateLocation(user.latitude, user.longitude, User.id)
         result.enqueue(object : Callback<User> {
             override fun onResponse(p0: Call<User>, p1: Response<User>) {
                 if (p1.isSuccessful) {
-                    Toast.makeText(context, p1.body()?.id.toString(), Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, p1.body()?.username.toString(), Toast.LENGTH_LONG).show()
                 } else {
                     Log.i("failureApi", p1.code().toString())
-                    Toast.makeText(context, "error sending ${p1.errorBody()}", Toast.LENGTH_LONG).show()
+//                    Toast.makeText(context, "error sending ${p1.errorBody()}", Toast.LENGTH_LONG).show()
                 }
             }
             override fun onFailure(p0: Call<User>, p1: Throwable) {

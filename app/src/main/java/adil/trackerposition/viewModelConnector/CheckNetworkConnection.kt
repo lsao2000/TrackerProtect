@@ -1,20 +1,17 @@
 package adil.trackerposition.viewModelConnector
 
-import adil.trackerposition.ui.SplashScreen
+import android.app.Dialog
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.LinkProperties
 import android.net.Network
 import android.net.NetworkCapabilities
-import android.widget.ImageView
+import android.util.Log
 import android.widget.Toast
 import androidx.core.content.getSystemService
 
-class CheckNetworkConnection (var context:Context){
-    lateinit var type: String
-    constructor(context: Context, type:String):this(context){
-        this.type = type
-    }
+class CheckNetworkConnection (var context:Context) {
+
     private val connectivityManager: ConnectivityManager = (context.getSystemService() as ConnectivityManager?)!!
 
     private fun NetworkCapabilities?.isNetworkCapabilitiesValid(): Boolean = when {
@@ -32,41 +29,41 @@ class CheckNetworkConnection (var context:Context){
             .isNetworkCapabilitiesValid()
     private val networkCallback = object :ConnectivityManager.NetworkCallback() {
         override fun onAvailable(network: Network) {
-            // Called when network is ready to use
+            super.onAvailable(network)
 
         }
 
         override fun onLost(network: Network) {
-            // Called when network disconnects
+            super.onLost(network)
             Toast.makeText(context, "No available connection", Toast.LENGTH_LONG).show()
         }
 
         override fun onUnavailable() {
-            // Called if the requested network request cannot be fulfilled
+            super.onUnavailable()
+
         }
 
-        override fun onCapabilitiesChanged(
-            network: Network,
-            networkCapabilities: NetworkCapabilities
-        ) {
-            // Called when the network corresponding to this request changes capabilities
-            // For example, "NetworkCapabilities.NET_CAPABILITY_VALIDATED" might appear with a delay.
+        override fun onCapabilitiesChanged(network: Network, networkCapabilities: NetworkCapabilities) {
+            super.onCapabilitiesChanged(network, networkCapabilities)
+
         }
 
         override fun onBlockedStatusChanged(network: Network, blocked: Boolean) {
-            // Called when access to the specified network is blocked or unblocked.
-            // This function can be called, for example, when the device goes to the sleep mode.
+            super.onBlockedStatusChanged(network, blocked)
+
         }
 
         override fun onLosing(network: Network, maxMsToLive: Int) {
-            // Called when the network is about to be lost
+            super.onLosing(network, maxMsToLive)
+
         }
 
         override fun onLinkPropertiesChanged(network: Network, linkProperties: LinkProperties) {
-            // Called when the network corresponding to this request changes LinkProperties
-        }
+            super.onLinkPropertiesChanged(network, linkProperties)
 
+        }
     }
+
     fun startListening(){
         connectivityManager.registerDefaultNetworkCallback(networkCallback)
     }
@@ -74,4 +71,5 @@ class CheckNetworkConnection (var context:Context){
         connectivityManager.unregisterNetworkCallback(networkCallback)
     }
     fun checkNetwork():Boolean = isNetworkConnected
+
 }

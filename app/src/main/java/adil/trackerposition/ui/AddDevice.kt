@@ -10,7 +10,7 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 
-class AddDevice : Fragment() {
+class AddDevice(var user_id:Int) : Fragment() {
     lateinit var addDevice: Button
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

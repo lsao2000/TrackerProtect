@@ -3,9 +3,10 @@ package adil.trackerposition.data.Api
 import adil.trackerposition.data.api.Event
 import com.google.gson.annotations.SerializedName
 
-data class User(@SerializedName("id")
-                var id:Int= 1){
-    @SerializedName("email")
+ class User(){
+         @SerializedName("id")
+         var id:Int=0
+     @SerializedName("email")
     lateinit var email:String
 
     @SerializedName("latitude")
@@ -16,23 +17,29 @@ data class User(@SerializedName("id")
 
     @SerializedName("username")
     lateinit var username:String
+    @SerializedName("user_city")
+    lateinit var city:String
 
-    @SerializedName("imgProfile")
-    lateinit var imgProfile:String
-
-    @SerializedName("pwd")
+    @SerializedName("password")
     lateinit var password:String
 
     @SerializedName("event")
     lateinit var lstEvent:List<Event>
-
-    constructor( password:String, longitude:Double, latitude:Double, imgProfile:String, username:String, event: List<Event>) : this(1) {
+    constructor(id:Int, password:String, email:String, username:String,  city:String):this(){
+        this.id = id
+        this.email = email
+        this.password = password
+        this.username = username
+        this.city = city
+    }
+    constructor(id:Int, password:String, email:String, username:String,  city:String, lstEvent: List<Event>, latitude:Double, longitude:Double) : this() {
         this.password = password
         this.id = id
-        this.longitude = longitude
-        this.latitude = latitude
-        this.imgProfile = imgProfile
         this.username = username
-        this.lstEvent = event
+        this.city = city
+        this.email = email
+        this.lstEvent = lstEvent
+        this.latitude = latitude
+        this.longitude = longitude
     }
 }
