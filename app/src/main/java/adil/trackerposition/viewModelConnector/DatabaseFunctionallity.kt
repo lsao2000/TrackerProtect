@@ -1,9 +1,6 @@
 package adil.trackerposition.viewModelConnector
 
-import adil.trackerposition.data.Api.ApiDatabase
-import adil.trackerposition.data.Api.GetDatabaseApi
-import adil.trackerposition.data.Api.ResponseObject
-import adil.trackerposition.data.Api.User
+import adil.trackerposition.data.Api.*
 import adil.trackerposition.ui.MainActivity
 import android.content.Context
 import android.content.Intent
@@ -54,7 +51,7 @@ class DatabaseFunctionallity(val context:Context){
         })
         return  responseObject
     }
-    fun getUserById(id:Int):ResponseObject?{
+    fun getUserById(id:Int, callback:UserCallback):User?{
         val database = getApiInstance()
         val getuser = database.getUserById(id)
         var user:User? = null
@@ -62,27 +59,27 @@ class DatabaseFunctionallity(val context:Context){
         getuser.enqueue(object: Callback<ResponseObject>{
             override fun onResponse(p0: Call<ResponseObject>, response: Response<ResponseObject>) {
                 if(response.isSuccessful){
+                    responseObject = response.body()
                     try {
-                        responseObject = response.body()
                         if(responseObject?.request_code == 200){
-                            user = response.body()!!.user
-                            Toast.makeText(context, user!!.email, Toast.LENGTH_LONG).show()
+                            user = responseObject!!.user
+                            callback.onUserReceived(user)
                         }else{
-                            Toast.makeText(context, "the user does not available", Toast.LENGTH_LONG).show()
-                            return
+                            callback.onFailure("user does not exist")
                         }
                     }catch (ex:Exception){
-                        Toast.makeText(context, ex.message, Toast.LENGTH_LONG).show()
+                        callback.onFailure(ex.message.toString() ?: "error while calling")
                     }
                 }else{
-                    return
+                    callback.onFailure("faill to fetch the user")
                 }
             }
             override fun onFailure(p0: Call<ResponseObject>, throwable: Throwable) {
                 Log.i("getUserFail", throwable.message.toString())
+                callback.onFailure(throwable.message.toString() ?: "faill to make request")
             }
         })
-        return responseObject
+        return user
     }
 
     fun getApiInstance():ApiDatabase{

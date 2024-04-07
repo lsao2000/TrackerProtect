@@ -99,10 +99,15 @@ class MainActivity : AppCompatActivity(){
         }
         connectivityManager.registerDefaultNetworkCallback(networkCallback)
         var getIntent = intent
-	var user_id = getIntent.getIntExtra("user_id").toInt()
+        var user_id:Int=0
+        try {
+             user_id = getIntent.getIntExtra("user_id", 0)
+        }catch (ex:Exception){
+            Toast.makeText(this, ex.message, Toast.LENGTH_LONG).show()
+        }
 //        var user_id =
         // INFO: the code below for changing fragment and handle button actions for fragment
-        supportFragmentManager.beginTransaction().add(R.id.fram, Home(this@MainActivity, user_id!!)).commit()
+        supportFragmentManager.beginTransaction().add(R.id.fram, Home(this@MainActivity, user_id)).commit()
         frameLayout = findViewById(R.id.fram)
         bottomNavigation = findViewById(R.id.nav)
         val support = supportFragmentManager

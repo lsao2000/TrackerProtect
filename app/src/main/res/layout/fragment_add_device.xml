@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                                   xmlns:tools="http://schemas.android.com/tools"
-                                                   android:layout_width="match_parent"
-                                                   android:layout_height="match_parent"
-                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
-                                                   tools:context=".ui.AddDevice">
-
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:context=".ui.AddDevice">
     <LinearLayout
             android:id="@+id/nameForm"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_marginTop="20dp"
-        android:weightSum="5">
+            android:weightSum="5">
        <TextView
            android:layout_width="0dp"
            android:layout_height="wrap_content"
@@ -33,93 +33,25 @@
             android:layout_weight="1"
             android:layout_width="0dp"
             android:gravity="end"
-            android:layout_height="40dp"
-            >
-        <Button
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@drawable/scan_button"
-            android:paddingStart="5dp"
-            android:paddingEnd="15dp"
+            android:layout_height="40dp" >
+            <Button
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/scan_button"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="15dp"
 
             />
         </LinearLayout>
     </LinearLayout>
-    <TextView
-            android:id="@+id/nameDevice"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/prompt_device_name"
-            android:textAppearance="@style/loginView"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/nameForm"
-            android:layout_marginTop="40dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp" />
-    <LinearLayout
-            android:id="@+id/deviceNameField"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/nameDevice"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/custom_input_lightmode">
-        <EditText
-                android:id="@+id/nameDeviceValue"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="@string/hint_device_name"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:inputType="text"
-                style="@style/no_underline_editText"
-                android:importantForAutofill="no"/>
-    </LinearLayout>
-    <TextView
-        android:id="@+id/imeiDevice"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/imei"
-        android:layout_marginTop="20dp"
-        android:textAppearance="@style/loginView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/deviceNameField"
-        android:layout_marginStart="20dp"
-    android:layout_marginEnd="20dp"
-    />
-    <LinearLayout
-            android:id="@+id/imeiField"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="20dp"
-            android:background="@drawable/custom_input_lightmode"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/imeiDevice" >
-        <EditText
-                android:id="@+id/imeiDeviceValue"
-               android:layout_width="match_parent"
-               android:layout_height="match_parent"
-               android:inputType="text"
-               android:hint="@string/hint_imei"
-               android:layout_marginStart="10dp"
-               android:layout_marginEnd="10dp"
-               style="@style/no_underline_editText" android:importantForAutofill="no"/>
-    </LinearLayout>
+
     <LinearLayout
             android:id="@+id/btnField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imeiField"
+            app:layout_constraintTop_toBottomOf="@id/nameForm"
             android:layout_marginEnd="20dp"
             android:layout_marginTop="20dp"
             android:layout_marginStart="20dp">
@@ -131,4 +63,11 @@
             style="@style/button_style_lightmode"
             />
     </LinearLayout>
+    <ImageView
+            android:id="@+id/qrcode"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:layout_margin="20dp"
+            app:layout_constraintTop_toBottomOf="@id/btnField"
+            android:background="@color/event" android:importantForAccessibility="no"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -77,10 +77,10 @@ class TrackerLocation(val context: Context)  {
         var retrofit: Retrofit? = GetDatabaseApi.getRetrofit()
         var apiDatabase: ApiDatabase = retrofit!!.create(ApiDatabase::class.java)
         var user: User = User()
-        User.id = id;
+        user.id = id;
         user.latitude = latitude
         user.longitude = longitude
-        var result = apiDatabase.updateLocation(user.latitude, user.longitude, User.id)
+        var result = apiDatabase.updateLocation(user.latitude, user.longitude, user.id)
         result.enqueue(object : Callback<User> {
             override fun onResponse(p0: Call<User>, p1: Response<User>) {
                 if (p1.isSuccessful) {

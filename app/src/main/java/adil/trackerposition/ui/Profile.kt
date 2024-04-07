@@ -2,6 +2,7 @@ package adil.trackerposition.ui
 
 import adil.trackerposition.R
 import adil.trackerposition.data.Api.User
+import adil.trackerposition.data.Api.UserCallback
 import adil.trackerposition.viewModelConnector.DatabaseFunctionallity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,6 +11,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
 
 class Profile(var user_id:Int) : Fragment() {
     lateinit var nameUser:TextView
@@ -17,14 +21,22 @@ class Profile(var user_id:Int) : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val view:View = inflater.inflate(R.layout.fragment_profile, container, false)
         // Inflate the layout for this fragment
+        nameUser = view.findViewById(R.id.firstLetter)
         var connectToDatabase = DatabaseFunctionallity(requireContext())
-        var responseObject = connectToDatabase.getUserById(user_id)
-//        Toast.makeText(requireContext(), User.id.toString(), Toast.LENGTH_LONG).show()
-//        nameUser = view.findViewById(R.id.firstLetter)
-//        nameUser.text = user.username.substring(0,2)
+        var user = connectToDatabase.getUserById(1, object: UserCallback{
+            override fun onUserReceived(user: User?) {
+                var username = user?.username
+                nameUser.text = username?.substring(0,2).toString()
+                Toast.makeText(activity, user?.email ?: "failed", Toast.LENGTH_LONG ).show()
+            }
+
+            override fun onFailure(message: String) {
+                Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
+            }
+        })
 
         return view
     }
