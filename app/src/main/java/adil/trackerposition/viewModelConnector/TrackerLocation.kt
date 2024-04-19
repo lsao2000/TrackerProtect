@@ -58,7 +58,7 @@ class TrackerLocation(val context: Context)  {
                             while (true) {
                                 var latitudeNumber: Double = locationValue.latitude.toDouble()
                                 var longitudeNumber: Double = locationValue.longitude.toDouble()
-                                updateLocationInDatabase(latitudeNumber, longitudeNumber, 1)
+                                updateLocationInDatabase(latitudeNumber, longitudeNumber, "lah34")
 //                                Toast.makeText(context, "run ${count} time", Toast.LENGTH_LONG).show()
                             }
                         }
@@ -72,15 +72,15 @@ class TrackerLocation(val context: Context)  {
         }
     }
 
-    suspend fun updateLocationInDatabase(latitude: Double, longitude: Double, id:Int) {
+    suspend fun updateLocationInDatabase(latitude: Double, longitude: Double, user_token:String) {
 
         var retrofit: Retrofit? = GetDatabaseApi.getRetrofit()
         var apiDatabase: ApiDatabase = retrofit!!.create(ApiDatabase::class.java)
         var user: User = User()
-        user.id = id;
+        user.user_token = user_token;
         user.latitude = latitude
         user.longitude = longitude
-        var result = apiDatabase.updateLocation(user.latitude, user.longitude, user.id)
+        var result = apiDatabase.updateLocation(user.latitude, user.longitude, user.user_token)
         result.enqueue(object : Callback<User> {
             override fun onResponse(p0: Call<User>, p1: Response<User>) {
                 if (p1.isSuccessful) {

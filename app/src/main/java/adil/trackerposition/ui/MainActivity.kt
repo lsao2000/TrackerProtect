@@ -30,15 +30,17 @@ class MainActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        // start listenning for network connection and changed in the network
+        // start listening for network connection and changed in the network
         connectivityManager = (this@MainActivity.getSystemService() as ConnectivityManager?)!!
         alert = Dialog(this@MainActivity)
         alert.setContentView(R.layout.error_connection_alert_dialog)
         alert.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         alert.setCancelable(false)
+        //////////////////////////////////////////////////////////////////// 
         val image:ImageView = alert.findViewById(R.id.img_error)
         Glide.with(this@MainActivity).load(R.drawable.error_connection).into(image)
-        fun NetworkCapabilities?.isNetworkCapabilitiesValid(): Boolean = when {
+
+	fun NetworkCapabilities?.isNetworkCapabilitiesValid(): Boolean = when {
             this == null -> false
             hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) &&
                     hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED) &&
@@ -69,7 +71,6 @@ class MainActivity : AppCompatActivity(){
                     }
                 }
 
-
             }
 
             override fun onUnavailable() {
@@ -98,35 +99,34 @@ class MainActivity : AppCompatActivity(){
             }
         }
         connectivityManager.registerDefaultNetworkCallback(networkCallback)
-        var getIntent = intent
-        var user_id:Int=0
+        var user_token:String = ""
         try {
-             user_id = getIntent.getIntExtra("user_id", 0)
+             user_token = intent.getStringExtra("user_token").toString()
+            Toast.makeText(this, "userToken: ${user_token}", Toast.LENGTH_LONG).show()
         }catch (ex:Exception){
             Toast.makeText(this, ex.message, Toast.LENGTH_LONG).show()
         }
-//        var user_id =
         // INFO: the code below for changing fragment and handle button actions for fragment
-        supportFragmentManager.beginTransaction().add(R.id.fram, Home(this@MainActivity, user_id)).commit()
+        supportFragmentManager.beginTransaction().add(R.id.fram, Home(this@MainActivity, user_token)).commit()
         frameLayout = findViewById(R.id.fram)
         bottomNavigation = findViewById(R.id.nav)
         val support = supportFragmentManager
         bottomNavigation.setOnItemSelectedListener {menu ->
             when(menu.itemId){
                 R.id.home -> {
-                    HandleButtonAction.changeFragment("home", R.id.fram, support, this@MainActivity, user_id)
+                    HandleButtonAction.changeFragment("home", R.id.fram, support, this@MainActivity, user_token)
                     true
                 }
                 R.id.all_devices ->{
-                    HandleButtonAction.changeFragment("tracking", R.id.fram, support, this@MainActivity,user_id )
+                    HandleButtonAction.changeFragment("tracking", R.id.fram, support, this@MainActivity, user_token)
                     true
                 }
                 R.id.profile -> {
-                    HandleButtonAction.changeFragment("profile", R.id.fram, support, this@MainActivity, user_id)
+                    HandleButtonAction.changeFragment("profile", R.id.fram, support, this@MainActivity,  user_token)
                     true
                 }
                 R.id.add_device -> {
-                    HandleButtonAction.changeFragment("addDevice", R.id.fram, support, this@MainActivity, user_id)
+                    HandleButtonAction.changeFragment("addDevice", R.id.fram, support, this@MainActivity, user_token)
                     true
                 }
                 else -> false

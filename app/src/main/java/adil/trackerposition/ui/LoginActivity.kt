@@ -22,9 +22,9 @@ class LoginActivity : AppCompatActivity() {
         btnLogin = findViewById(R.id.login)
         register = findViewById(R.id.register)
         btnLogin.setOnClickListener{
-            var usernameValue = username.text.toString()
-            var passwordValue = password.text.toString()
-            var loginProcess = DatabaseFunctionallity(this@LoginActivity)
+            val usernameValue = username.text.toString()
+            val passwordValue = password.text.toString()
+            val loginProcess = DatabaseFunctionallity(this@LoginActivity)
             try {
                 loginProcess.checkLoginUser(usernameValue, passwordValue, username, password)
             }catch(ex:Exception){

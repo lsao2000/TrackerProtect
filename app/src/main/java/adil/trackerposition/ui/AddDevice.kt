@@ -18,7 +18,7 @@ import com.google.zxing.BarcodeFormat
 import com.journeyapps.barcodescanner.*
 
 
-class AddDevice(var user_id:Int) : Fragment() {
+class AddDevice(var user_token:String) : Fragment() {
     lateinit var btnScan:Button
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,22 +31,21 @@ class AddDevice(var user_id:Int) : Fragment() {
             try {
                 scanCode()
             }catch (ex:Exception){
-
                 Toast.makeText(activity, ex.message, Toast.LENGTH_LONG).show()
             }
         }
         try{
+            Toast.makeText(activity, user_token, Toast.LENGTH_LONG).show()
             val barcodeEncoder:BarcodeEncoder = BarcodeEncoder()
-            val bitmap:Bitmap = barcodeEncoder.encodeBitmap("test this qrcode",BarcodeFormat.QR_CODE, 400, 400)
+            val bitmap:Bitmap = barcodeEncoder.encodeBitmap( user_token,BarcodeFormat.QR_CODE, 400, 400)
             val image:ImageView = view.findViewById(R.id.qrcode)
             image.setImageBitmap(bitmap)
-
         }catch (ex:Exception){
             Toast.makeText(activity, ex.message, Toast.LENGTH_LONG).show()
         }
         return view
     }
-    val barLaucher = registerForActivityResult<ScanOptions, ScanIntentResult>(ScanContract()) { result: ScanIntentResult ->
+    val barLauncher = registerForActivityResult<ScanOptions, ScanIntentResult>(ScanContract()) { result: ScanIntentResult ->
         if (result.contents != null) {
             val builder: AlertDialog.Builder = AlertDialog.Builder(activity)
             builder.setTitle("Result")
@@ -69,7 +68,7 @@ class AddDevice(var user_id:Int) : Fragment() {
             setOrientationLocked(true)
             setCaptureActivity(CaptureCamera::class.java)
         }
-        barLaucher.launch(scanOptions)
+        barLauncher.launch(scanOptions)
 
     }
 }

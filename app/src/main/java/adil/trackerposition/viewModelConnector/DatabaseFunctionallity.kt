@@ -16,21 +16,27 @@ import kotlin.properties.Delegates
 
 class DatabaseFunctionallity(val context:Context){
     fun checkLoginUser(username:String, password:String, usernameField:EditText, passwordField:EditText):ResponseObject?{
-        var database:ApiDatabase = getApiInstance()
-        var loginUser = database.loginUser(username, password)
+        val database:ApiDatabase = getApiInstance()
+        val loginUser = database.loginUser(username, password)
         var responseObject:ResponseObject? = null
         loginUser.enqueue(object: Callback<ResponseObject>{
             override fun onResponse(p0: Call<ResponseObject>, p1: Response<ResponseObject>) {
                 if(p1.isSuccessful ){
                    if(p1.body()!!.request_code == 200){
                       responseObject = p1.body()
-                       var user = responseObject!!.user
-                       val intent = Intent(context, MainActivity::class.java)
-                        intent.putExtra("user_id", user!!.id)
-                       context.startActivity(intent)
+                       if(responseObject?.user != null){
+                           Toast.makeText(context, "user token is : ${responseObject?.user?.user_token}", Toast.LENGTH_LONG).show()
+                           val intent = Intent(context, MainActivity::class.java)
+                           val user = responseObject?.user
+                           intent.putExtra("user_token", user?.user_token)
+                           context.startActivity(intent)
+                       }else{
+                           Toast.makeText(context, "user isn't available", Toast.LENGTH_LONG).show()
+                       }
+
                    }
                    else if(p1.body()!!.request_code == 404){
-                       var msg = p1.body()!!.msg
+                       val msg = p1.body()!!.msg
                        if(msg.equals("password")){
                            Toast.makeText(context, "password not correct", Toast.LENGTH_LONG).show()
                           passwordField.error = "password not correct"
@@ -51,9 +57,9 @@ class DatabaseFunctionallity(val context:Context){
         })
         return  responseObject
     }
-    fun getUserById(id:Int, callback:UserCallback):User?{
+    fun getUserByToken(user_token:String, callback:UserCallback):User?{
         val database = getApiInstance()
-        val getuser = database.getUserById(id)
+        val getuser = database.getUserByToken(user_token)
         var user:User? = null
         var responseObject:ResponseObject? = null
         getuser.enqueue(object: Callback<ResponseObject>{

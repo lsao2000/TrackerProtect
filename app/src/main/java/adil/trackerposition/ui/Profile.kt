@@ -15,7 +15,7 @@ import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 
-class Profile(var user_id:Int) : Fragment() {
+class Profile(var user_token:String) : Fragment() {
     lateinit var nameUser:TextView
 
     override fun onCreateView(
@@ -26,19 +26,16 @@ class Profile(var user_id:Int) : Fragment() {
         // Inflate the layout for this fragment
         nameUser = view.findViewById(R.id.firstLetter)
         var connectToDatabase = DatabaseFunctionallity(requireContext())
-        var user = connectToDatabase.getUserById(1, object: UserCallback{
+        var user = connectToDatabase.getUserByToken(user_token, object: UserCallback{
             override fun onUserReceived(user: User?) {
-                var username = user?.username
-                nameUser.text = username?.substring(0,2).toString()
+                val username = user?.username
+                nameUser.text = username?.substring(0,1).toString()
                 Toast.makeText(activity, user?.email ?: "failed", Toast.LENGTH_LONG ).show()
             }
-
             override fun onFailure(message: String) {
                 Toast.makeText(activity, message, Toast.LENGTH_LONG).show()
             }
         })
-
         return view
     }
-
 }

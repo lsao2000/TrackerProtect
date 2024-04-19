@@ -9,22 +9,22 @@ import android.content.Context
 import androidx.fragment.app.FragmentManager
 class HandleButtonAction {
     companion object {
-        fun changeFragment(button: String, id: Int, supportFragement: FragmentManager, context:Activity, user_id:Int) {
+        fun changeFragment(button: String, id: Int, supportFragement: FragmentManager, context:Activity, user_token:String) {
             when (button) {
                 "home" -> {
-                    val home = Home(context, user_id)
+                    val home = Home(context, user_token)
                     supportFragement.beginTransaction().replace(id, home).commit()
                 }
                 "tracking" -> {
-                    var tracking = Tracking(user_id)
+                    var tracking = Tracking(user_token)
                     supportFragement.beginTransaction().replace(id, tracking).commit()
                 }
                 "profile" -> {
-                    var profile = Profile(user_id)
+                    var profile = Profile(user_token)
                     supportFragement.beginTransaction().replace(id, profile).commit()
                 }
                 else -> {
-                    var addDevice = AddDevice(user_id)
+                    var addDevice = AddDevice(user_token)
                     supportFragement.beginTransaction().replace(id, addDevice).commit()
                 }
             }

@@ -8,7 +8,7 @@ interface ApiDatabase {
     fun getAllUser():Call<List<User>>
     @FormUrlEncoded
     @POST("updateLocation.php")
-    fun updateLocation(@Field("latitude") latitude:Double, @Field("longitude") longitude: Double, @Field("id") id:Int):Call<User>
+    fun updateLocation(@Field("latitude") latitude:Double, @Field("longitude") longitude: Double, @Field("user_token") id:String):Call<User>
 
     @GET("getUser.php")
     fun getUser():Call<List<User>>
@@ -21,6 +21,6 @@ interface ApiDatabase {
     @POST("register_user.php")
     fun registerUser(@Field("username") username:String, @Field("password") password:String, @Field("email") emailUser:String, @Field("city") userCity:String):Call<ResponseObject>
 
-    @GET("getUserById.php")
-    fun getUserById(@Query("id") id:Int):Call<ResponseObject>
+    @GET("getUserByToken.php")
+    fun getUserByToken(@Query("user_token") user_token:String):Call<ResponseObject>
 }
