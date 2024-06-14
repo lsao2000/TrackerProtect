@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity(){
         alert.setContentView(R.layout.error_connection_alert_dialog)
         alert.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         alert.setCancelable(false)
-        //////////////////////////////////////////////////////////////////// 
+        ////////////////////////////////////////////////////////////////////
         val image:ImageView = alert.findViewById(R.id.img_error)
         Glide.with(this@MainActivity).load(R.drawable.error_connection).into(image)
 
@@ -62,7 +62,6 @@ class MainActivity : AppCompatActivity(){
                 }
                 Toast.makeText(this@MainActivity, "network available", Toast.LENGTH_LONG).show()
             }
-
             override fun onLost(network: Network) {
                 super.onLost(network)
                 runOnUiThread {
@@ -70,32 +69,21 @@ class MainActivity : AppCompatActivity(){
                         alert.show()
                     }
                 }
-
             }
-
             override fun onUnavailable() {
                 super.onUnavailable()
-
             }
-
             override fun onCapabilitiesChanged(network: Network, networkCapabilities: NetworkCapabilities) {
                 super.onCapabilitiesChanged(network, networkCapabilities)
-
             }
-
             override fun onBlockedStatusChanged(network: Network, blocked: Boolean) {
                 super.onBlockedStatusChanged(network, blocked)
-
             }
-
             override fun onLosing(network: Network, maxMsToLive: Int) {
                 super.onLosing(network, maxMsToLive)
-
             }
-
             override fun onLinkPropertiesChanged(network: Network, linkProperties: LinkProperties) {
                 super.onLinkPropertiesChanged(network, linkProperties)
-
             }
         }
         connectivityManager.registerDefaultNetworkCallback(networkCallback)
